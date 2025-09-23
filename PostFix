@@ -1,0 +1,109 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+class stack
+{
+    int n,top;
+    char s[50], in[50], post[50];
+    public:
+    stack()
+    {
+        n=5;
+        top=-1;
+    }
+    stack(int no)
+    {
+        n=no;
+        top=-1;
+    }
+    void push(char data)
+    {
+        top++;
+        s[top]=data;
+    }
+    char pop()
+    {
+        char data;
+        data=s[top];
+        top--;
+        return data;
+    }
+    char peep()
+    {
+        char data;
+        data=s[top];
+        return data;
+    }
+};
+void main()
+{
+    char in[50];
+    stack s;
+    clrscr();
+    cout<<endl<<"\t\t CONVERT INFIX EXPRESSION TO POSTFIX EXPRESSION "<<endl;
+    cout<<endl<<"enter any infix expression :";
+    cin>>in;
+    int l;
+    l=strlen(in);
+    s.push('(');
+    in[l]=')';
+    l++;
+    in[l]='\0';
+    cout<<endl<<"The Postfix Expression : ";
+    for(int i=0;i<=l;i++)
+    {
+        switch(in[i])
+        {
+            case '(':
+                s.push(in[i]);
+                break;
+            case '^':
+                if(s.peep()=='^')
+                {
+                cout<<s.pop();
+                }
+                s.push(in[i]);
+                break;
+            case '/':
+                while(s.peep()=='^' || s.peep()=='/')
+                {
+                cout<<s.pop();
+                }
+                s.push(in[i]);
+                break;
+            case '*':
+                while(s.peep()=='^' || s.peep()=='/' || s.peep()=='*')
+                {
+                cout<<s.pop();
+                }
+                s.push(in[i]);
+                break;
+            case '+':
+                while(s.peep()=='^' || s.peep()=='/' || s.peep()=='*' || s.peep()=='+')
+                {
+                cout<<s.pop();
+                }
+                s.push(in[i]);
+                break;
+            case '-':
+                while(s.peep()=='^' || s.peep()=='/' || s.peep()=='*' || s.peep()=='+' ||
+                s.peep()=='-')
+                {
+                cout<<s.pop();
+                }
+                s.push(in[i]);
+                break;
+            case ')':
+                while(s.peep()!='(')
+                {
+                cout<<s.pop();
+                }
+                s.pop();
+                break;
+            default:
+                cout<<in[i];
+        }
+    }
+    getch();
+}
