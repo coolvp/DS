@@ -1,0 +1,131 @@
+#include<stdio.h>
+#include<conio.h>
+#include<alloc.h>
+struct node
+{
+    int data;
+    struct node *next;
+} *newnode,*first,*last,*list;
+void create()
+{
+    int e;
+    first=NULL;
+    printf("enter data (-99 to exit) :");
+    scanf("%d",&e);
+    while (e!=-99)
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        newnode->data=e;
+        if(first==NULL)
+            first=newnode;
+        else
+            last->next=newnode;
+            last=newnode;
+            printf("enter data (-99 to exit) :");
+            scanf("%d",&e);
+    }
+    newnode->next=NULL;
+}
+void display()
+{
+    newnode=first;
+    do
+    {
+        printf("\t%d",newnode->data);
+        newnode=newnode->next;
+    } while(newnode!=NULL);
+}
+void insert()
+{
+    int e,p,i;
+    printf("enter position :");
+    scanf("%d",&p);
+    newnode=(struct node*) malloc (sizeof(struct node));
+    printf("enter data :");
+    scanf("%d",&e);
+    newnode->data=e;
+    newnode->next=NULL;
+    if(p==1)
+    {
+        newnode->next=first;
+        first=newnode;
+    }
+    else
+    {
+        list=first;
+        for(i=1;i<=p-2 && list!=last;i++)
+            list=list->next;
+        if(list==last)
+        {
+            list->next=newnode;
+            last=newnode;
+        }
+        else
+        {
+            newnode->next=list->next;
+            list->next=newnode;
+        }
+    }
+}
+void del()
+{
+    int p,i;
+    printf("enter position :");
+    scanf("%d",&p);
+    if(p==1)
+    {
+        first=first->next;
+    }
+    else
+    {
+        list=first;
+        for(i=1;i<=p-2;i++)
+        {
+            list=list->next;
+        } 
+        if(list->next==NULL || list== NULL)
+        {
+            printf("\n out of order");
+        }
+        else
+        {
+            list->next=list->next->next;
+        }
+    }
+}
+void main()
+{
+    int ch;
+    do
+    {
+        clrscr();
+        printf("\n\t 1.create SLL");
+        printf("\n\t 2.display");
+        printf("\n\t 3.insert element");
+        printf("\n\t 4.delete element");
+        printf("\n\t 5.exit");
+        printf("\n\tenter choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1:
+                create();
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+                insert();
+                break;
+            case 4:
+                del();
+                break;
+            case 5:
+                printf("\nBye Bye..");
+                break;
+            default:
+                printf("wrong choice");
+        }
+        getch();
+    }while(ch!=5);
+}
