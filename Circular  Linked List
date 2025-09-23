@@ -1,0 +1,216 @@
+#include<conio.h>
+#include<stdio.h>
+#include<alloc.h>
+struct node
+{
+    int data;
+    struct node *next;
+} *first,*list,*newnode,*last;
+void create()
+{
+    int e;
+    first=NULL;
+    printf("\nEnter the no(-99 to exit):");
+    scanf("%d",&e);
+    do
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        newnode->data=e;
+        newnode->next=NULL;
+        if(first==NULL)
+        {
+            first=newnode;
+        }
+        else
+        {
+            last->next=newnode;
+        }
+        last=newnode;
+        printf("\nEnter the no(-99 to exit):");
+        scanf("%d",&e);
+    } while(e!=-99);
+    last->next=first;
+}
+void addbeg()
+{
+    int e;
+    printf("\nEnter no:");
+    scanf("%d",&e);
+    newnode=(struct node*)malloc(sizeof(struct node));
+    newnode->data=e;
+    newnode->next=first;
+    first=newnode;
+    last->next=first;
+}
+void addmid()
+{
+    int e,p,i;
+    printf("\nEnter the position:");
+    scanf("%d",&p);
+    printf("\nenter the no:");
+    scanf("%d",&e);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=e;
+    newnode->next=NULL;
+    if(p==1)
+    {
+        newnode->next=first;
+        first=newnode;
+        last->next=first;
+    }
+    else
+    {
+        list=first;
+        for(i=1;i<=p-2 && list->next!=first;i++)
+        {
+            list=list->next;
+        }
+        newnode->next=list->next;
+        list->next=newnode;
+        if(newnode->next==first)
+        {
+            last=newnode;
+        }
+    }
+}
+void addend()
+{
+    int e;
+    printf("\nEnter the no:");
+    scanf("%d",&e);
+    newnode=(struct node *)malloc(sizeof(struct node));
+    newnode->data=e;
+    list=first;
+    while(list->next!=first)
+    {
+        list=list->next;
+    }
+    newnode->next=list->next;
+    list->next=newnode;
+    if(newnode->next==first)
+    {
+        last=newnode;
+    }
+}
+void delbeg()
+{
+    if(first==last)
+    {
+        printf("\nlinklist is empty");
+    }
+    else
+    {
+        last->next=first->next;
+        first=first->next;
+        printf("\nFirst node is deleted");
+    }
+}
+void delmid()
+{
+    int i,p;
+    printf("\nEnter position:");
+    scanf("%d",&p);
+    list=first;
+    if(list==last)
+    {
+        printf("\nLinklist is empty");
+    }
+    else
+    {
+        for(i=1;i<=p-2 && list->next->next!=first;i++)
+        {
+            list=list->next;
+        }
+        if(list->next->next==first)
+        {
+            printf(" Out of order");
+        }
+        else
+        {
+            list->next=list->next->next;
+            printf("\nnode:- %d is deleted",p);
+        }
+    }
+}
+void delend()
+{
+    if(first==last)
+    {
+        printf("\nLinklist is empty");
+    }
+    else
+    {
+        list=first;
+        while(list->next->next!=first)
+        {
+            list=list->next;
+        }
+        list->next=first;
+        printf("\nLast node is deleted");
+    }
+}
+void disp()
+{
+    if(first==last)
+    {
+        printf("\nLinklist is empty");
+    }
+    else
+    {
+        list=first;
+        do
+        {
+            printf("\t %d",list->data);
+            list=list->next;
+        } while(list!=first);
+    }
+}
+void main()
+{
+int ch;
+do
+{
+    clrscr();
+    printf("\n1:Create the linked list");
+    printf("\n2:Insert at 1st position");
+    printf("\n3:Insert at any position");
+    printf("\n4:Insert at the last position");
+    printf("\n5:Delete from 1st position");
+    printf("\n6:Delete from any position");
+    printf("\n7:Delete from the last position");
+    printf("\n8:Display linked list");
+    printf("\n9:Exit");
+    printf("\nEnter the your choice:");
+    scanf("%d",&ch);
+    switch(ch)
+    {
+        case 1:
+            create();
+            break;
+        case 2:
+            addbeg();
+            break;
+        case 3:
+            addmid();
+            break;
+        case 4:
+            addend();
+            break;
+        case 5:
+            delbeg();
+            break;
+        case 6:
+            delmid();
+            break;
+        case 7:
+            delend();
+            break;
+        case 8:
+            disp();
+            break;
+        case 9:
+            break;
+    }
+    getch();
+    } while(ch!=9);
+}
