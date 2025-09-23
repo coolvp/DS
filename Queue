@@ -2,98 +2,97 @@
 #include<iostream.h>
 #include<stdlib.h>
 #include<stdio.h>
-
 class queue
 {
-  int q[10],f,r,n;
-  public:
-  queue()
-  {
-    f =-1;
-    r=-1;
-    n=10;
-  }
-  void insert(int data)
-  {
-    if(r==n-1)
+    int q[10],f,r,n;
+    public:
+    queue()
     {
-      cout<<"\n\t Queue is overflow";
-      return;
+        f =-1;
+        r=-1;
+        n=10;
     }
-    r++;
-    q[r]=data;
-    if(f==-1)
-      f=0;
-  }
-  int del()
-  {
-    int data;
-    if(f==-1)
+    void insert(int data)
     {
-      cout<<"\n\t Queue is underflow";
-      return 0;
+        if(r==n-1)
+        {
+            cout<<"\n\t Queue is overflow";
+            return;
+        }
+        r++;
+        q[r]=data;
+        if(f==-1)
+            f=0;
     }
-    data=q[f];
-    if(f==r) // Q is empty?
+    int del()
     {
-      f=-1;
-      r=-1;
+        int data;
+        if(f==-1)
+        {
+            cout<<"\n\t Queue is underflow";
+            return 0;
+        }
+        data=q[f];
+        if(f==r) // Q is empty?
+        {
+            f=-1;
+            r=-1;
+        }
+        else
+            f++;
+        return data;
     }
-    else
-      f++;
-    return data;
-  }
-  void display()
-  {
-    int i;
-    if(f==-1)
-      cout<<"\n\t Queue is Empty";
-    else
+    void display()
     {
-      cout<<"\n the Queue is\n";
-      for(i=f;i<=r;i++)
-      {
-        cout<<q[i]<<"\t";
-      }
+        int i;
+        if(f==-1)
+            cout<<"\n\t Queue is Empty";
+        else
+        {
+            cout<<"\n the Queue is\n";
+            for(i=f;i<=r;i++)
+            {
+            cout<<q[i]<<"\t";
+            }
+        }
     }
-  }
 };
 void main()
 {
-  int e,ch;
-  queue q;
-  do
-  {
-    clrscr();
-    cout<<"\n\t\t queue implementation";
-    cout<<"\n\t1:Insert";
-    cout<<"\n\t2:Delete";
-    cout<<"\n\t3:Display";
-    cout<<"\n\t4:Exit";
-    cout<<"\n\tEnter your choice :";
-    cin>>ch;
-    switch(ch)
+    int e,ch;
+    queue q;
+    do
     {
-    case 1:
-      cout<<"\n\tEnter the element:";
-      cin>>e;
-      q.insert(e);
-      break;
-    case 2:
-      e=q.del();
-      if(e!=0)
-      cout<<"\n\tThe deleted element is "<<e;
-      break;
-    case 3:
-      q.display();
-      break;
-    case 4:
-      cout<<"\n Bye Bye";
-      exit(0);
-      break;
-    default:
-      cout<<"Wrong choice";
-    }
-    getch();
-  }while(ch!=4);
+        clrscr();
+        cout<<"\n\t\t queue implementation";
+        cout<<"\n\t1:Insert";
+        cout<<"\n\t2:Delete";
+        cout<<"\n\t3:Display";
+        cout<<"\n\t4:Exit";
+        cout<<"\n\tEnter your choice :";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+                cout<<"\n\tEnter the element:";
+                cin>>e;
+                q.insert(e);
+                break;
+            case 2:
+                e=q.del();
+                if(e!=0)
+                cout<<"\n\tThe deleted element is "<<e;
+                break;
+            case 3:
+                q.display();
+                break;
+            case 4:
+                cout<<"\n Bye Bye";
+                exit(0);
+            break;
+            default:
+                cout<<"Wrong choice";
+        }
+        getch();
+    }while(ch!=4);
 }
