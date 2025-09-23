@@ -1,0 +1,99 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<string.h>
+class stack
+{
+    int n,top;
+    char s[50];
+    public:
+    stack()
+    {
+        n=10;
+        top=-1;
+    }
+    stack(int no)
+    {
+        n=no;
+        top=-1;
+    }
+    void push(char data)
+    {
+        top++;
+        s[top]=data;
+    }
+    char pop()
+    {
+        char data;
+        data=s[top];
+        top--;
+        return data;
+    }
+    char peep()
+    {
+        char data;
+        data=s[top];
+        return data;
+    }
+};
+void main()
+{
+    char in[50],pre[50];
+    stack s;
+    clrscr();
+    cout<<endl<<"\t\t CONVERT INFIX EXPRESSION TO PREFIX EXPRESSION "<<endl;
+    cout<<endl<<"Enter the infix expression:";
+    cin>>in;
+    int l,i,j=0;
+    s.push('(');
+    l=strlen(in);
+    strrev(in);
+    for(i=0;i<l;i++)
+    {
+        switch(in[i])
+        {
+            case ')':
+                s.push(in[i]);
+                break;
+            case '^':
+                while(s.peep()=='^')
+                pre[j++]=s.pop();
+                s.push(in[i]);
+                break;
+            case '/':
+                while(s.peep()=='^' || s.peep()=='/')
+                {
+                pre[j++]=s.pop();
+                }
+                s.push(in[i]);
+                break;
+            case '*':
+                while(s.peep()=='^' || s.peep()=='/' || s.peep()=='*')
+                pre[j++]=s.pop();
+                s.push(in[i]);
+                break;
+            case '+':
+                while(s.peep()=='^'||s.peep()=='*'||s.peep()=='/' || s.peep()=='+')
+                pre[j++]=s.pop();
+                s.push(in[i]);
+                break;
+            case '-':
+                while(s.peep()=='^'||s.peep()=='*'||s.peep()=='/' || s.peep()=='+' ||
+                s.peep()=='-')
+                pre[j++]=s.pop();
+                s.push(in[i]);
+                break;
+            case '(':
+                while(s.peep()!=')')
+                pre[j++]=s.pop();
+                s.pop();
+                break;
+            default:
+                pre[j++]=in[i];
+        }
+    }
+    while(s.peep()!='(')
+    pre[j++]=s.pop();
+    cout<<"The prefix expression :"<<strrev(pre);
+    getch();
+}
