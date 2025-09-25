@@ -1,0 +1,154 @@
+#include<stdio.h>
+#include<conio.h>
+#include<alloc.h>
+struct node
+{
+struct node *next;
+struct node *prev;
+int data;
+} *list,*first,*last,*newnode;
+void create()
+{
+int e;
+first=NULL;
+last=NULL;
+printf("\nenter data(-99 to exit):");
+scanf("%d",&e);
+while(e!=-99)
+{
+newnode=(struct node*)malloc(sizeof(struct node));
+newnode->data=e;
+newnode->prev=NULL;
+newnode->next=NULL;
+if(first==NULL)
+first=newnode;
+else
+{
+last->next=newnode;
+newnode->prev=last;
+}
+last=newnode;
+printf("enter data(-99 to exit):");
+scanf("%d",&e);
+}
+last=newnode;
+}
+void disp_left()
+{
+list=first;
+do
+{
+printf("\t %d",list->data);
+list=list->next;
+} while(list!=NULL);
+}
+void disp_right()
+{
+list=last;
+do
+{
+printf("\t %d",list->data);
+list=list->prev;
+} while(list!=NULL);
+}
+void insert()
+{
+int e,p,i;
+printf("enter position");
+scanf("%d",&p);
+newnode=(struct node*) malloc(sizeof(struct node));
+printf("enter data ");
+scanf("%d",&e);
+newnode->data=e;
+newnode->prev=NULL;
+newnode->next=NULL;
+if(p==1)
+{
+newnode->next=first;
+first->prev=newnode;
+first=newnode;
+return;
+}
+list=first;
+for(i=1;i<=p-2 && list!=last;i++)
+list=list->next;
+if(list==last)
+{
+list->next=newnode;
+newnode->prev=list;
+last=newnode;
+}
+else
+{
+newnode->next=list->next;
+newnode->prev=list;
+list->next->prev=newnode;
+list->next=newnode;
+}
+}
+void delete()
+{
+int e,i,p;
+printf("\nenter position");
+scanf("%d",&p);
+if(p==1)
+{
+first=first->next;
+first->prev=NULL;
+return;
+}
+else
+{
+list=first;
+for(i=1;i<=p-2;i++)
+list=list->next;
+if(list->next==NULL || list== NULL)
+{
+printf("\n out of order");
+}
+else
+{
+list->next=list->next->next;
+list->next->prev=list;
+}
+}
+}
+void main()
+{
+int ch;
+do
+{
+clrscr();
+printf("\n\t1. Create DLL");
+printf("\n\t2. insert");
+printf("\n\t3. Delete");
+printf("\n\t4. Display from left");
+printf("\n\t5. Display from right");
+printf("\n\t6. Exit");
+printf("\n\tEnter your choice :");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+create();
+break;
+case 2:
+insert();
+break;
+case 3:
+delete();
+break;
+case 4:
+disp_left();
+break;
+case 5:
+disp_right();
+break;
+case 6:
+break;
+default:
+printf("\n wrong choice");
+}
+getch();
+}while(ch!=6);
+}
