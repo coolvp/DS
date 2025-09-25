@@ -1,0 +1,94 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+class stack
+{
+int n,top;
+char s[10][20];
+public:
+stack()
+{
+n=5;
+top=-1;
+}
+stack(int no)
+{
+n=no;
+top=-1;
+}
+void push (char data[])
+{
+if(top==n-1)
+{
+cout <<endl<<"stack overflow";
+return;
+}
+top++;
+strcpy(s[top],data);
+}
+char* pop()
+{
+char data [20];
+if(top==-1)
+{
+cout<<endl<<"stack underflow";
+return NULL;
+}
+strcpy(data,s[top]);
+top--;
+return data;
+}
+void display()
+{
+if(top==-1)
+{
+cout<<endl<<"stack is empty";
+}
+else
+{
+cout<<endl<<"the contents of stack is";
+for(int i=top;i>=0;i--)
+cout<<endl<<"\t"<<s[i];
+}
+}
+}; //end of class
+void main()
+{
+int i,ch;
+char e [20];
+stack s;
+do
+{
+clrscr();
+cout<<endl<<"\t\t stack implemention";
+cout<<endl<<"\t 1. push";
+cout<<endl<<"\t 2. pop";
+cout<<endl<<"\t 3. display";
+cout<<endl<<"\t 4. exit";
+cout<<endl<<"\t enter choice:";
+cin>>ch;
+switch (ch)
+{
+case 1:
+cout<<endl<<" enter string:";
+flushall();
+cin>>e;
+s.push(e);
+break;
+case 2:
+strcpy(e,s.pop());
+if(strcmp(e,NULL)!=0)
+cout<<endl<<"the deleted string is "<<e;
+break;
+case 3:
+s.display();
+break;
+case 4:
+break;
+default:
+cout<<endl<<"wrong choice";
+}
+getch();
+} while (ch!=4);
+}
