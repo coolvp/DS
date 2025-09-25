@@ -1,0 +1,86 @@
+#include<iostream.h>
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+#include<stdlib.h>
+#include<string.h>
+class stack
+{
+int s[10],top;
+public:
+stack()
+{
+top=-1;
+}
+void push(int data)
+{
+top++;
+s[top]=data;
+}
+int pop()
+{
+int data;
+data=s[top];
+top--;
+return data;
+}
+void display()
+{
+cout<<"\n Evaluation of Prefix Expression :"<<s[top];
+}
+};
+void main()
+{
+char pre[50],x[1];
+int l,a,b,rs,i;
+stack s;
+clrscr();
+cout<<"\nEnter Prefix Expression :";
+cin>>pre;
+l=strlen(pre);
+strrev(pre);
+for(i=0;i<l;i++)
+{
+switch(pre[i])
+{
+case '^':
+a=s.pop();
+b=s.pop();
+rs=pow(a,b);
+s.push(rs);
+break;
+case '/':
+a=s.pop();
+b=s.pop();
+rs=a/b;
+s.push(rs);
+break;
+case '*':
+a=s.pop();
+b=s.pop();
+rs=a*b;
+s.push(rs);
+break;
+case '+':
+a=s.pop();
+b=s.pop();
+rs=a+b;
+s.push(rs);
+break;
+case '-':
+a=s.pop();
+b=s.pop();
+rs=a-b;
+s.push(rs);
+break;
+default:
+x[0]=pre[i];
+x[1]='\0';
+a=atoi(x);
+s.push(a);
+break;
+}
+}
+s.display();
+getch();
+}
