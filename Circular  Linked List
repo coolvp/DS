@@ -1,6 +1,6 @@
-#include <iostream>
+#include <iostream.h>
 #include <stdlib.h>
-using namespace std;
+#include<conio.h>
 
 struct node
 {
@@ -17,22 +17,22 @@ void create()
 
     do
     {
-        newnode = (struct node *)malloc(sizeof(struct node));
-        newnode->data = e;
-        newnode->next = NULL;
+	newnode = (struct node *)malloc(sizeof(struct node));
+	newnode->data = e;
+	newnode->next = NULL;
 
-        if (first == NULL)
-        {
-            first = newnode;
-        }
-        else
-        {
-            last->next = newnode;
-        }
-        last = newnode;
+	if (first == NULL)
+	{
+	    first = newnode;
+	}
+	else
+	{
+	    last->next = newnode;
+	}
+	last = newnode;
 
-        cout << "\nEnter the no(-99 to exit):";
-        cin >> e;
+	cout << "\nEnter the no(-99 to exit):";
+	cin >> e;
 
     } while (e != -99);
 
@@ -66,24 +66,24 @@ void addmid()
 
     if (p == 1)
     {
-        newnode->next = first;
-        first = newnode;
-        last->next = first;
+	newnode->next = first;
+	first = newnode;
+	last->next = first;
     }
     else
     {
-        list = first;
-        for (i = 1; i <= p - 2 && list->next != first; i++)
-        {
-            list = list->next;
-        }
-        newnode->next = list->next;
-        list->next = newnode;
+	list = first;
+	for (i = 1; i <= p - 2 && list->next != first; i++)
+	{
+	    list = list->next;
+	}
+	newnode->next = list->next;
+	list->next = newnode;
 
-        if (newnode->next == first)
-        {
-            last = newnode;
-        }
+	if (newnode->next == first)
+	{
+	    last = newnode;
+	}
     }
 }
 
@@ -99,14 +99,14 @@ void addend()
     list = first;
     while (list->next != first)
     {
-        list = list->next;
+	list = list->next;
     }
     newnode->next = list->next;
     list->next = newnode;
 
     if (newnode->next == first)
     {
-        last = newnode;
+	last = newnode;
     }
 }
 
@@ -114,13 +114,13 @@ void delbeg()
 {
     if (first == last)
     {
-        cout << "\nlinklist is empty";
+	cout << "\nlinklist is empty";
     }
     else
     {
-        last->next = first->next;
-        first = first->next;
-        cout << "\nFirst node is deleted";
+	last->next = first->next;
+	first = first->next;
+	cout << "\nFirst node is deleted";
     }
 }
 
@@ -134,24 +134,24 @@ void delmid()
 
     if (list == last)
     {
-        cout << "\nLinklist is empty";
+	cout << "\nLinklist is empty";
     }
     else
     {
-        for (i = 1; i <= p - 2 && list->next->next != first; i++)
-        {
-            list = list->next;
-        }
+	for (i = 1; i <= p - 2 && list->next->next != first; i++)
+	{
+	    list = list->next;
+	}
 
-        if (list->next->next == first)
-        {
-            cout << " Out of order";
-        }
-        else
-        {
-            list->next = list->next->next;
-            cout << "\nnode:- " << p << " is deleted";
-        }
+	if (list->next->next == first)
+	{
+	    cout << " Out of order";
+	}
+	else
+	{
+	    list->next = list->next->next;
+	    cout << "\nnode:- " << p << " is deleted";
+	}
     }
 }
 
@@ -159,17 +159,17 @@ void delend()
 {
     if (first == last)
     {
-        cout << "\nLinklist is empty";
+	cout << "\nLinklist is empty";
     }
     else
     {
-        list = first;
-        while (list->next->next != first)
-        {
-            list = list->next;
-        }
-        list->next = first;
-        cout << "\nLast node is deleted";
+	list = first;
+	while (list->next->next != first)
+	{
+	    list = list->next;
+	}
+	list->next = first;
+	cout << "\nLast node is deleted";
     }
 }
 
@@ -177,16 +177,16 @@ void disp()
 {
     if (first == last)
     {
-        cout << "\nLinklist is empty";
+	cout << "\nLinklist is empty";
     }
     else
     {
-        list = first;
-        do
-        {
-            cout << "\t " << list->data;
-            list = list->next;
-        } while (list != first);
+	list = first;
+	do
+	{
+	    cout << "\t " << list->data;
+	    list = list->next;
+	} while (list != first);
     }
 }
 
@@ -195,47 +195,49 @@ int main()
     int ch;
     do
     {
-        cout << "\n1:Create the linked list";
-        cout << "\n2:Insert at 1st position";
-        cout << "\n3:Insert at any position";
-        cout << "\n4:Insert at the last position";
-        cout << "\n5:Delete from 1st position";
-        cout << "\n6:Delete from any position";
-        cout << "\n7:Delete from the last position";
-        cout << "\n8:Display linked list";
-        cout << "\n9:Exit";
-        cout << "\nEnter your choice:";
-        cin >> ch;
+	clrscr();
+	cout << "\n1:Create the linked list";
+	cout << "\n2:Insert at 1st position";
+	cout << "\n3:Insert at any position";
+	cout << "\n4:Insert at the last position";
+	cout << "\n5:Delete from 1st position";
+	cout << "\n6:Delete from any position";
+	cout << "\n7:Delete from the last position";
+	cout << "\n8:Display linked list";
+	cout << "\n9:Exit";
+	cout << "\nEnter your choice:";
+	cin >> ch;
 
-        switch (ch)
-        {
-        case 1:
-            create();
-            break;
-        case 2:
-            addbeg();
-            break;
-        case 3:
-            addmid();
-            break;
-        case 4:
-            addend();
-            break;
-        case 5:
-            delbeg();
-            break;
-        case 6:
-            delmid();
-            break;
-        case 7:
-            delend();
-            break;
-        case 8:
-            disp();
-            break;
-        case 9:
-            break;
-        }
+	switch (ch)
+	{
+	case 1:
+	    create();
+	    break;
+	case 2:
+	    addbeg();
+	    break;
+	case 3:
+	    addmid();
+	    break;
+	case 4:
+	    addend();
+	    break;
+	case 5:
+	    delbeg();
+	    break;
+	case 6:
+	    delmid();
+	    break;
+	case 7:
+	    delend();
+	    break;
+	case 8:
+	    disp();
+	    break;
+	case 9:
+	    break;
+	}
+    getch();
     } while (ch != 9);
 
     return 0;
