@@ -1,189 +1,214 @@
-#include<conio.h>
-#include<stdio.h>
-#include<alloc.h>
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+
 struct node
 {
     int data;
     struct node *next;
-} *first,*list,*newnode,*last;
+} *first, *list, *newnode, *last;
+
 void create()
 {
     int e;
-    first=NULL;
-    printf("\nEnter the no(-99 to exit):");
-    scanf("%d",&e);
+    first = NULL;
+    cout << "\nEnter the no(-99 to exit):";
+    cin >> e;
+
     do
     {
-        newnode=(struct node*)malloc(sizeof(struct node));
-        newnode->data=e;
-        newnode->next=NULL;
-        if(first==NULL)
+        newnode = (struct node *)malloc(sizeof(struct node));
+        newnode->data = e;
+        newnode->next = NULL;
+
+        if (first == NULL)
         {
-            first=newnode;
+            first = newnode;
         }
         else
         {
-            last->next=newnode;
+            last->next = newnode;
         }
-        last=newnode;
-        printf("\nEnter the no(-99 to exit):");
-        scanf("%d",&e);
-    } while(e!=-99);
-    last->next=first;
+        last = newnode;
+
+        cout << "\nEnter the no(-99 to exit):";
+        cin >> e;
+
+    } while (e != -99);
+
+    last->next = first;
 }
+
 void addbeg()
 {
     int e;
-    printf("\nEnter no:");
-    scanf("%d",&e);
-    newnode=(struct node*)malloc(sizeof(struct node));
-    newnode->data=e;
-    newnode->next=first;
-    first=newnode;
-    last->next=first;
+    cout << "\nEnter no:";
+    cin >> e;
+
+    newnode = (struct node *)malloc(sizeof(struct node));
+    newnode->data = e;
+    newnode->next = first;
+    first = newnode;
+    last->next = first;
 }
+
 void addmid()
 {
-    int e,p,i;
-    printf("\nEnter the position:");
-    scanf("%d",&p);
-    printf("\nenter the no:");
-    scanf("%d",&e);
-    newnode=(struct node *)malloc(sizeof(struct node));
-    newnode->data=e;
-    newnode->next=NULL;
-    if(p==1)
+    int e, p, i;
+    cout << "\nEnter the position:";
+    cin >> p;
+    cout << "\nenter the no:";
+    cin >> e;
+
+    newnode = (struct node *)malloc(sizeof(struct node));
+    newnode->data = e;
+    newnode->next = NULL;
+
+    if (p == 1)
     {
-        newnode->next=first;
-        first=newnode;
-        last->next=first;
+        newnode->next = first;
+        first = newnode;
+        last->next = first;
     }
     else
     {
-        list=first;
-        for(i=1;i<=p-2 && list->next!=first;i++)
+        list = first;
+        for (i = 1; i <= p - 2 && list->next != first; i++)
         {
-            list=list->next;
+            list = list->next;
         }
-        newnode->next=list->next;
-        list->next=newnode;
-        if(newnode->next==first)
+        newnode->next = list->next;
+        list->next = newnode;
+
+        if (newnode->next == first)
         {
-            last=newnode;
+            last = newnode;
         }
     }
 }
+
 void addend()
 {
     int e;
-    printf("\nEnter the no:");
-    scanf("%d",&e);
-    newnode=(struct node *)malloc(sizeof(struct node));
-    newnode->data=e;
-    list=first;
-    while(list->next!=first)
+    cout << "\nEnter the no:";
+    cin >> e;
+
+    newnode = (struct node *)malloc(sizeof(struct node));
+    newnode->data = e;
+
+    list = first;
+    while (list->next != first)
     {
-        list=list->next;
+        list = list->next;
     }
-    newnode->next=list->next;
-    list->next=newnode;
-    if(newnode->next==first)
+    newnode->next = list->next;
+    list->next = newnode;
+
+    if (newnode->next == first)
     {
-        last=newnode;
+        last = newnode;
     }
 }
+
 void delbeg()
 {
-    if(first==last)
+    if (first == last)
     {
-        printf("\nlinklist is empty");
+        cout << "\nlinklist is empty";
     }
     else
     {
-        last->next=first->next;
-        first=first->next;
-        printf("\nFirst node is deleted");
+        last->next = first->next;
+        first = first->next;
+        cout << "\nFirst node is deleted";
     }
 }
+
 void delmid()
 {
-    int i,p;
-    printf("\nEnter position:");
-    scanf("%d",&p);
-    list=first;
-    if(list==last)
+    int i, p;
+    cout << "\nEnter position:";
+    cin >> p;
+
+    list = first;
+
+    if (list == last)
     {
-        printf("\nLinklist is empty");
+        cout << "\nLinklist is empty";
     }
     else
     {
-        for(i=1;i<=p-2 && list->next->next!=first;i++)
+        for (i = 1; i <= p - 2 && list->next->next != first; i++)
         {
-            list=list->next;
+            list = list->next;
         }
-        if(list->next->next==first)
+
+        if (list->next->next == first)
         {
-            printf(" Out of order");
+            cout << " Out of order";
         }
         else
         {
-            list->next=list->next->next;
-            printf("\nnode:- %d is deleted",p);
+            list->next = list->next->next;
+            cout << "\nnode:- " << p << " is deleted";
         }
     }
 }
+
 void delend()
 {
-    if(first==last)
+    if (first == last)
     {
-        printf("\nLinklist is empty");
+        cout << "\nLinklist is empty";
     }
     else
     {
-        list=first;
-        while(list->next->next!=first)
+        list = first;
+        while (list->next->next != first)
         {
-            list=list->next;
+            list = list->next;
         }
-        list->next=first;
-        printf("\nLast node is deleted");
+        list->next = first;
+        cout << "\nLast node is deleted";
     }
 }
+
 void disp()
 {
-    if(first==last)
+    if (first == last)
     {
-        printf("\nLinklist is empty");
+        cout << "\nLinklist is empty";
     }
     else
     {
-        list=first;
+        list = first;
         do
         {
-            printf("\t %d",list->data);
-            list=list->next;
-        } while(list!=first);
+            cout << "\t " << list->data;
+            list = list->next;
+        } while (list != first);
     }
 }
-void main()
+
+int main()
 {
-int ch;
-do
-{
-    clrscr();
-    printf("\n1:Create the linked list");
-    printf("\n2:Insert at 1st position");
-    printf("\n3:Insert at any position");
-    printf("\n4:Insert at the last position");
-    printf("\n5:Delete from 1st position");
-    printf("\n6:Delete from any position");
-    printf("\n7:Delete from the last position");
-    printf("\n8:Display linked list");
-    printf("\n9:Exit");
-    printf("\nEnter the your choice:");
-    scanf("%d",&ch);
-    switch(ch)
+    int ch;
+    do
     {
+        cout << "\n1:Create the linked list";
+        cout << "\n2:Insert at 1st position";
+        cout << "\n3:Insert at any position";
+        cout << "\n4:Insert at the last position";
+        cout << "\n5:Delete from 1st position";
+        cout << "\n6:Delete from any position";
+        cout << "\n7:Delete from the last position";
+        cout << "\n8:Display linked list";
+        cout << "\n9:Exit";
+        cout << "\nEnter your choice:";
+        cin >> ch;
+
+        switch (ch)
+        {
         case 1:
             create();
             break;
@@ -210,7 +235,8 @@ do
             break;
         case 9:
             break;
-    }
-    getch();
-    } while(ch!=9);
+        }
+    } while (ch != 9);
+
+    return 0;
 }
